@@ -46,6 +46,20 @@ void add_days_to_date(int* mm, int* dd, int* yy, int days_left_to_add ) {
     } 
 }
 
+const char* calculateDayOfWeek(int day, int month, int year) {
+    const char* daysOfWeek[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+    
+    if (month < 3) {
+        month += 12;
+        year--;
+    }
+    
+    int h = (day + (13 * (month + 1) / 5) + year + (year / 4) - (year / 100) + (year / 400)) % 7;
+    
+    return daysOfWeek[h];
+}
+
+
 int main() {
     int mm, dd, yy, days_left_to_add;
     printf("Please enter a date between the tears 1800 and 10000 in the format mm/dd/yyyy (days to add): ");
@@ -53,6 +67,9 @@ int main() {
     
     add_days_to_date(&mm, &dd, &yy, days_left_to_add);
     
-    printf("The new date is now: %s %d, %d\n", month_names[mm], dd, yy);
-    
+    const char* dayOfWeek = calculateDayOfWeek(dd, mm, yy);
+
+    printf("The new date is now: %s %d, %d and it's a %s.\n", month_names[mm], dd, yy, dayOfWeek);
+           
+ 
 }
