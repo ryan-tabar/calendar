@@ -16,7 +16,9 @@ bool is_leap_year(int year) {
 // April, June, September, November = 30 days
 // The rest = 31 days
 // Feb = 28 unless leap year then 29
-int days_in_month[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+const int days_in_month[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+const char* month_names[] = {"", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 
 void add_days_to_date(int* mm, int* dd, int* yy, int days_left_to_add ) {
     
@@ -51,6 +53,6 @@ int main() {
     
     add_days_to_date(&mm, &dd, &yy, days_left_to_add);
     
-    printf("The new date is now: %d/%d/%d\n", mm, dd, yy);
+    printf("The new date is now: %s %d, %d\n", month_names[mm], dd, yy);
     
 }
