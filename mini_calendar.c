@@ -54,8 +54,15 @@ const char* calculateDayOfWeek(int day, int month, int year) {
         year--;
     }
     
-    int h = (day + (13 * (month + 1) / 5) + year + (year / 4) - (year / 100) + (year / 400)) % 7;
+    int century = year / 100;
+    int yearOfCentury = year % 100;
     
+    int h = (day + 13 * (month + 1) / 5 + yearOfCentury + yearOfCentury / 4 + century / 4 - 2 * century + 6) % 7;
+    
+    if (h < 0) {
+        h += 7;
+    }
+
     return daysOfWeek[h];
 }
 
