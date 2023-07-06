@@ -20,27 +20,27 @@ const int days_in_month[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 const char* month_names[] = {"", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 
-void add_days_to_date(int* dd, int* mm, int* yy, int days_left_to_add ) {
+void add_days_to_date(int* day, int* month, int* year, int days_left_to_add ) {
     
     while (days_left_to_add > 0) {
-        int days_left_in_month = days_in_month[*mm] - *dd;
+        int days_left_in_month = days_in_month[*month] - *day;
         // if february and leap year, then add 1 day
-        if (*mm == 2 && is_leap_year(*yy)) {
+        if (*month == 2 && is_leap_year(*year)) {
             days_left_in_month++; 
         }
         if (days_left_to_add > days_left_in_month) {
             days_left_to_add -= days_left_in_month;
             days_left_to_add--;
-            *dd = 1;
+            *day = 1;
             // if december, change month to january and increment year
-            if (*mm == 12) {
-                (*yy)++;
-                *mm = 1;
+            if (*month == 12) {
+                (*year)++;
+                *month = 1;
             } else {
-                (*mm)++;
+                (*month)++;
             }
         } else {
-            *dd += days_left_to_add;
+            *day += days_left_to_add;
             days_left_to_add = 0;
         }
     } 
@@ -72,10 +72,21 @@ const char* get_suffix(int day) {
     return last_digit < 1 | last_digit > 3 ? suffixes[0] : suffixes[last_digit];
 }
 
+bool is_valid_date(int day, int month, int year) {
+     return !(day < 1 || day > days_in_month[month] || month < 1 || month > 12 || year < 1800 || year > 10000); 
+}   
+
 int main() {
     int dd, mm, yy, days_left_to_add;
     printf("Please enter a date between the years 1800 and 10000 in the format dd/mm/yyyy (days to add): ");
-    scanf("%d/%d/%d %d", &dd, &mm, &yy, &days_left_to_add);
+    if (scanf("%d/%d/%d %d", &dd, &mm, &yy, &days_left_to_add) != 4) {
+        printf("Date format incorrect!\n");
+        return 1;
+    }
+    if (!is_valid_date(dd, mm, yy)) {
+        printf("Date entered is not valid!\n");
+        return 1;
+    }    
     
     add_days_to_date(&dd, &mm, &yy, days_left_to_add);
     
