@@ -34,17 +34,20 @@ Make sure you have the following tools installed on your system:
 
 1. Open a terminal and navigate to the project directory.
 2. Run the following command to compile the project:
+  make
 
 ### Step 3: Executing the Project
 
 1. After the compilation is successful, an executable named `mini_calendar` will be generated.
 2. To run the program, execute the following command in the terminal:
-3. Follow the prompts to enter a date and the number of days to add.
-4. The program will calculate the new date and display the result.
+   ./mini_calendar
+4. Follow the prompts to enter a date and the number of days to add.
+5. The program will calculate the new date and display the result.
 
 ### Step 4: Cleaning Up
 
 To clean up the compiled files, you can run the following command in the terminal:
+  make clean
 This will remove the object files and the `mini_calendar` executable.
 
 Feel free to explore and modify the code to suit your needs!
