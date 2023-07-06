@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
 
-SRCS = mini_calendar.c functions.c
+SRCS = main.c functions.c
 OBJS = $(SRCS:.c=.o)
 HEADER = functions.h
 TARGET = mini_calendar
