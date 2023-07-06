@@ -67,7 +67,7 @@ const char* calculate_day_of_week(int day, int month, int year) {
 const char* get_suffix(int day) {
     int last_digit = day % 10;
     const char* suffixes[] = {"th", "st", "nd", "rd"};
-    return last_digit < 1 | last_digit > 3 ? suffixes[0] : suffixes[last_digit];
+    return last_digit < 1 || last_digit > 3 ? suffixes[0] : suffixes[last_digit];
 }
 
 bool is_valid_date(int day, int month, int year) {
