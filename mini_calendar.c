@@ -66,15 +66,20 @@ const char* calculate_day_of_week(int day, int month, int year) {
     return days_of_week[h];
 }
 
+const char* get_suffix(int day) {
+    int last_digit = day % 10;
+    const char* suffixes[] = {"th", "st", "nd", "rd"};
+    return last_digit < 1 | last_digit > 3 ? suffixes[0] : suffixes[last_digit];
+}
+
 int main() {
     int dd, mm, yy, days_left_to_add;
-    printf("Please enter a date between the tears 1800 and 10000 in the format dd/mm/yyyy (days to add): ");
+    printf("Please enter a date between the years 1800 and 10000 in the format dd/mm/yyyy (days to add): ");
     scanf("%d/%d/%d %d", &dd, &mm, &yy, &days_left_to_add);
     
     add_days_to_date(&dd, &mm, &yy, days_left_to_add);
     
     const char* day_of_week = calculate_day_of_week(dd, mm, yy);
-
-    printf("The new date is now: %s %d %s, %d.\n", day_of_week, dd, month_names[mm], yy); 
+    printf("The new date is now: %s %d%s %s, %d.\n", day_of_week, dd, get_suffix(dd), month_names[mm], yy); 
 
 }
