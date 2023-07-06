@@ -20,7 +20,7 @@ const int days_in_month[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 const char* month_names[] = {"", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 
-void add_days_to_date(int* mm, int* dd, int* yy, int days_left_to_add ) {
+void add_days_to_date(int* dd, int* mm, int* yy, int days_left_to_add ) {
     
     while (days_left_to_add > 0) {
         int days_left_in_month = days_in_month[*mm] - *dd;
@@ -46,8 +46,8 @@ void add_days_to_date(int* mm, int* dd, int* yy, int days_left_to_add ) {
     } 
 }
 
-const char* calculateDayOfWeek(int day, int month, int year) {
-    const char* daysOfWeek[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+const char* calculate_day_of_week(int day, int month, int year) {
+    const char* days_of_week[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
     
     if (month < 3) {
         month += 12;
@@ -55,28 +55,26 @@ const char* calculateDayOfWeek(int day, int month, int year) {
     }
     
     int century = year / 100;
-    int yearOfCentury = year % 100;
+    int year_of_century = year % 100;
     
-    int h = (day + 13 * (month + 1) / 5 + yearOfCentury + yearOfCentury / 4 + century / 4 - 2 * century + 6) % 7;
+    int h = (day + 13 * (month + 1) / 5 + year_of_century + year_of_century / 4 + century / 4 - 2 * century + 6) % 7;
     
     if (h < 0) {
         h += 7;
     }
 
-    return daysOfWeek[h];
+    return days_of_week[h];
 }
 
-
 int main() {
-    int mm, dd, yy, days_left_to_add;
-    printf("Please enter a date between the tears 1800 and 10000 in the format mm/dd/yyyy (days to add): ");
-    scanf("%d/%d/%d %d", &mm, &dd, &yy, &days_left_to_add);
+    int dd, mm, yy, days_left_to_add;
+    printf("Please enter a date between the tears 1800 and 10000 in the format dd/mm/yyyy (days to add): ");
+    scanf("%d/%d/%d %d", &dd, &mm, &yy, &days_left_to_add);
     
-    add_days_to_date(&mm, &dd, &yy, days_left_to_add);
+    add_days_to_date(&dd, &mm, &yy, days_left_to_add);
     
-    const char* dayOfWeek = calculateDayOfWeek(dd, mm, yy);
+    const char* day_of_week = calculate_day_of_week(dd, mm, yy);
 
-    printf("The new date is now: %s %d, %d and it's a %s.\n", month_names[mm], dd, yy, dayOfWeek);
-           
- 
+    printf("The new date is now: %s %d %s, %d.\n", day_of_week, dd, month_names[mm], yy); 
+
 }
