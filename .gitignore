@@ -29,6 +29,7 @@
 *.dylib
 
 # Executables
+mini_calendar
 *.exe
 *.out
 *.app
